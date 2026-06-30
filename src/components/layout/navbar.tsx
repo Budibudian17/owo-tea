@@ -80,7 +80,6 @@ export default function Navbar() {
                       >
                         {item.name}
                       </a>
-                      <span className={navbarStyles.menuPlus}>+</span>
                     </div>
                   ))}
                 </div>
@@ -89,10 +88,6 @@ export default function Navbar() {
                 <div className={navbarStyles.icons}>
                   <button className={navbarStyles.iconBtn}>
                     <Search size={22} />
-                  </button>
-                  <button className={`${navbarStyles.iconBtn} ${navbarStyles.cartBtn}`}>
-                    <ShoppingCart size={22} />
-                    <span className={navbarStyles.cartBadge}>1</span>
                   </button>
                   {/* Mobile Menu Button */}
                   <button
