@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import Navbar from "@/components/layout/navbar"
 import Hero from "@/components/sections/hero"
 import BestDrink from "@/components/sections/best-drink"
@@ -11,8 +14,24 @@ import Team from "@/components/sections/team"
 import MarqueeFooter from "@/components/sections/marquee-footer"
 import Testimonial from "@/components/sections/testimonial"
 import Footer from "@/components/sections/footer"
+import Loading from "@/components/ui/loading"
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
     <main>
       <Navbar />
