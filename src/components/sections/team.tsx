@@ -14,17 +14,17 @@ export default function Team() {
     {
       name: "Raffi Raditya",
       role: "Co - Founder",
-      image: "/images/raffi.webp"
+      image: "/images/rapi.webp"
+    },
+    {
+      name: "Adzan A. Putra Fiqra",
+      role: "Operations & Finance",
+      image: "/images/ajanarsenal.webp"
     },
     {
       name: "Arhab Rizki Sabian",
       role: "Marketing",
-      image: "/images/arhab.webp"
-    },
-    {
-      name: "Adzan Arshall Fiqra",
-      role: "Operations & Finance",
-      image: "/images/adzan.webp"
+      image: "/images/riski.webp"
     }
   ]
 
@@ -35,10 +35,10 @@ export default function Team() {
         <div className={teamStyles.header}>
           <span className={teamStyles.badge}>TIM KAMI</span>
           <h2 className={teamStyles.title}>
-            Bertemu dengan <span className={teamStyles.titleAccent}>Para Ahli</span>
+            Kenalan Sama <span className={teamStyles.titleAccent}>Kami</span>
           </h2>
           <p className={teamStyles.subtitle}>
-            Orang-orang berbakat di balik setiap cangkir teh lezat yang kami sajikan
+            Sekumpulan anak muda yang pengin berbagi kebahagiaan lewat segelas es teh
           </p>
         </div>
 

@@ -14,11 +14,13 @@ export const testimonialStyles = {
   titleAccent: 'text-green-600',
   subtitle: 'text-gray-600 text-lg max-w-2xl mx-auto animate-slide-up delay-100',
   
-  // Grid
-  grid: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8',
+  // Marquee container for cards
+  marqueeContainer: 'w-full overflow-hidden',
+  marqueeWrapper: 'relative',
+  marqueeContent: 'flex gap-8 animate-marquee hover:pause',
   
   // Testimonial Card
-  card: 'group relative bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2',
+  card: 'group relative bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 min-w-[350px] md:min-w-[400px] h-[400px] flex flex-col justify-between',
   
   // Quote icon
   quoteIcon: 'text-6xl text-green-600/20 font-serif leading-none mb-4',

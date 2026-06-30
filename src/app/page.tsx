@@ -10,6 +10,7 @@ import FAQ from "@/components/sections/faq"
 import Team from "@/components/sections/team"
 import MarqueeFooter from "@/components/sections/marquee-footer"
 import Testimonial from "@/components/sections/testimonial"
+import Footer from "@/components/sections/footer"
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <Team />
       <Testimonial />
       <MarqueeFooter />
+      <Footer />
     </main>
   )
 }
