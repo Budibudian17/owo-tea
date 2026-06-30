@@ -21,9 +21,9 @@ export default function Loading() {
   }, [])
 
   return (
-    <div className="fixed inset-0 bg-[#F4F1EA] flex flex-col items-center justify-center z-50">
+    <div className="fixed inset-0 bg-[#F4F1EA] flex flex-col items-center justify-center z-50 px-6">
       {/* Logo */}
-      <div className="relative w-64 h-32 mb-8 animate-bounce">
+      <div className="relative w-48 sm:w-64 h-24 sm:h-32 mb-6 sm:mb-8 animate-bounce">
         <Image
           src="/images/owotealogolongs.webp"
           alt="OWO TEA Logo"
@@ -33,12 +33,12 @@ export default function Loading() {
       </div>
 
       {/* Loading Text */}
-      <div className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="text-lg sm:text-2xl font-bold text-gray-800 mb-4 text-center">
         Menyeduh Teh Segar...
       </div>
 
       {/* Progress Bar */}
-      <div className="w-64 h-2 bg-gray-300 rounded-full overflow-hidden">
+      <div className="w-full max-w-xs sm:max-w-sm h-2 bg-gray-300 rounded-full overflow-hidden">
         <div
           className="h-full bg-green-600 transition-all duration-300 ease-out"
           style={{ width: `${progress}%` }}

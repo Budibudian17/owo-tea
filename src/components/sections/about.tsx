@@ -1,10 +1,12 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import { aboutStyles } from "@/styles/about"
+import { useIsDesktop } from "@/hooks/use-media-query"
 
 export default function About() {
+  const isDesktop = useIsDesktop()
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
@@ -16,7 +18,7 @@ export default function About() {
   const imageRef2 = useRef<HTMLDivElement>(null)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imageRef.current) return
+    if (!isDesktop || !imageRef.current) return
     
     const rect = imageRef.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
@@ -40,7 +42,7 @@ export default function About() {
   }
 
   const handleMouseMove2 = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imageRef2.current) return
+    if (!isDesktop || !imageRef2.current) return
     
     const rect = imageRef2.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
@@ -79,10 +81,11 @@ export default function About() {
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 style={{
-                  transform: isHovering 
-                    ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05) rotate(-6deg)` 
-                    : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) rotate(-6deg)',
-                  transition: isHovering ? 'none' : 'transform 0.5s ease-out',
+                  transform:
+                    isDesktop && isHovering
+                      ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05) rotate(-6deg)`
+                      : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) rotate(-6deg)",
+                  transition: isHovering ? "none" : "transform 0.5s ease-out",
                 }}
               >
                 <Image
@@ -100,10 +103,11 @@ export default function About() {
                 onMouseMove={handleMouseMove2}
                 onMouseLeave={handleMouseLeave2}
                 style={{
-                  transform: isHovering2 
-                    ? `perspective(1000px) rotateX(${rotateX2}deg) rotateY(${rotateY2}deg) scale(1.05) rotate(6deg)` 
-                    : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) rotate(6deg)',
-                  transition: isHovering2 ? 'none' : 'transform 0.5s ease-out',
+                  transform:
+                    isDesktop && isHovering2
+                      ? `perspective(1000px) rotateX(${rotateX2}deg) rotateY(${rotateY2}deg) scale(1.05) rotate(6deg)`
+                      : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) rotate(6deg)",
+                  transition: isHovering2 ? "none" : "transform 0.5s ease-out",
                 }}
               >
                 <Image

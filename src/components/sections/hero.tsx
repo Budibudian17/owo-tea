@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import { heroStyles } from "@/styles/hero"
 import Image from "next/image"
+import { useIsDesktop } from "@/hooks/use-media-query"
 
 export default function Hero() {
   const [rotateX, setRotateX] = useState(0)
@@ -12,6 +13,7 @@ export default function Hero() {
   const [showTitle, setShowTitle] = useState(false)
   const [showDescription, setShowDescription] = useState(false)
   const imageRef = useRef<HTMLDivElement>(null)
+  const isDesktop = useIsDesktop()
 
   const fullText = "Kualitas Premium Sejak 2026"
 
@@ -32,7 +34,7 @@ export default function Hero() {
   }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!imageRef.current) return
+    if (!isDesktop || !imageRef.current) return
 
     const rect = imageRef.current.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
@@ -98,10 +100,11 @@ export default function Hero() {
                 onMouseLeave={handleMouseLeave}
                 onMouseEnter={handleMouseEnter}
                 style={{
-                  transform: isHovering
-                    ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`
-                    : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)',
-                  transition: 'transform 0.1s ease-out',
+                  transform:
+                    isDesktop && isHovering
+                      ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`
+                      : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)",
+                  transition: "transform 0.1s ease-out",
                 }}
               >
                 <Image

@@ -4,9 +4,11 @@ import { useState } from "react"
 import { bestDrinkStyles } from "@/styles/best-drink"
 import Image from "next/image"
 import RandomBackground from "@/components/ui/random-background"
+import { useIsDesktop } from "@/hooks/use-media-query"
 
 export default function BestDrink() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const isDesktop = useIsDesktop()
 
   const products = [
     {
@@ -16,7 +18,7 @@ export default function BestDrink() {
       price: "",
       image: "/images/teabackground1.webp",
       tag: "Segera",
-      isComingSoon: true
+      isComingSoon: true,
     },
     {
       id: 2,
@@ -25,7 +27,7 @@ export default function BestDrink() {
       price: "Rp 5.000",
       image: "/images/iceteaproduct.webp",
       tag: "Terlaris",
-      isFeatured: true
+      isFeatured: true,
     },
     {
       id: 3,
@@ -34,16 +36,27 @@ export default function BestDrink() {
       price: "",
       image: "/images/teabackground2.webp",
       tag: "Segera",
-      isComingSoon: true
-    }
+      isComingSoon: true,
+    },
   ]
+
+  const getCardTransform = (product: (typeof products)[0]) => {
+    if (!isDesktop) return undefined
+
+    if (hoveredCard === product.id) {
+      return `translateY(-20px) scale(${product.isFeatured ? "1.08" : "1.02"})`
+    }
+    if (hoveredCard !== null) {
+      return "translateY(10px) scale(0.98)"
+    }
+    return undefined
+  }
 
   return (
     <section className={bestDrinkStyles.section}>
       <RandomBackground />
-      
+
       <div className={bestDrinkStyles.container}>
-        {/* Header */}
         <div className={bestDrinkStyles.header}>
           <div className={bestDrinkStyles.headerBadge}>
             <span className={bestDrinkStyles.badgeText}>Favorit Kami</span>
@@ -56,24 +69,19 @@ export default function BestDrink() {
           </p>
         </div>
 
-        {/* Cards Grid */}
         <div className={bestDrinkStyles.grid}>
-          {products.map((product, index) => (
+          {products.map((product) => (
             <div
               key={product.id}
-              className={`${bestDrinkStyles.card} ${product.isFeatured ? bestDrinkStyles.featuredCard : ''} ${product.isComingSoon ? bestDrinkStyles.comingSoonCard : ''}`}
+              className={`${bestDrinkStyles.card} ${product.isFeatured ? bestDrinkStyles.featuredCard : ""} ${product.isComingSoon ? bestDrinkStyles.comingSoonCard : ""}`}
               style={{
-                transform: hoveredCard === null 
-                  ? `translateY(${product.isFeatured ? '-10px' : '0'}) scale(${product.isFeatured ? '1.05' : '1'})` 
-                  : hoveredCard === product.id 
-                    ? `translateY(-20px) scale(${product.isFeatured ? '1.08' : '1.02'})` 
-                    : `translateY(10px) scale(0.98)`,
-                transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                transform: getCardTransform(product),
+                transition:
+                  "transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
               }}
-              onMouseEnter={() => setHoveredCard(product.id)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseEnter={() => isDesktop && setHoveredCard(product.id)}
+              onMouseLeave={() => isDesktop && setHoveredCard(null)}
             >
-              {/* Card Image */}
               <div className={bestDrinkStyles.cardImageWrapper}>
                 <div className={bestDrinkStyles.cardImage}>
                   <Image
@@ -84,24 +92,31 @@ export default function BestDrink() {
                   />
                   {product.isComingSoon && (
                     <div className={bestDrinkStyles.comingSoonOverlay}>
-                      <span className={bestDrinkStyles.comingSoonText}>Segera Hadir</span>
+                      <span className={bestDrinkStyles.comingSoonText}>
+                        Segera Hadir
+                      </span>
                     </div>
                   )}
                   {!product.isComingSoon && (
                     <div className={bestDrinkStyles.cardTag}>
-                      <span className={bestDrinkStyles.tagText}>{product.tag}</span>
+                      <span className={bestDrinkStyles.tagText}>
+                        {product.tag}
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Card Content */}
               <div className={bestDrinkStyles.cardContent}>
                 <h3 className={bestDrinkStyles.productName}>{product.name}</h3>
-                <p className={bestDrinkStyles.productDescription}>{product.description}</p>
+                <p className={bestDrinkStyles.productDescription}>
+                  {product.description}
+                </p>
                 {!product.isComingSoon && (
                   <div className={bestDrinkStyles.cardFooter}>
-                    <span className={bestDrinkStyles.price}>{product.price}</span>
+                    <span className={bestDrinkStyles.price}>
+                      {product.price}
+                    </span>
                     <div className={bestDrinkStyles.cardButton}>
                       <span className={bestDrinkStyles.buttonIcon}>→</span>
                     </div>
@@ -109,11 +124,10 @@ export default function BestDrink() {
                 )}
               </div>
 
-              {/* Decorative Elements */}
               {!product.isComingSoon && (
                 <>
-                  <div className={bestDrinkStyles.cardDecor1}></div>
-                  <div className={bestDrinkStyles.cardDecor2}></div>
+                  <div className={bestDrinkStyles.cardDecor1} />
+                  <div className={bestDrinkStyles.cardDecor2} />
                 </>
               )}
             </div>
