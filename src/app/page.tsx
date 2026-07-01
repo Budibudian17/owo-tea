@@ -15,6 +15,7 @@ import MarqueeFooter from "@/components/sections/marquee-footer"
 import Testimonial from "@/components/sections/testimonial"
 import Footer from "@/components/sections/footer"
 import Loading from "@/components/ui/loading"
+import MusicWidget from "@/components/ui/music-widget"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -47,6 +48,7 @@ export default function Home() {
       <Testimonial />
       <MarqueeFooter />
       <Footer />
+      <MusicWidget />
     </main>
   )
 }
