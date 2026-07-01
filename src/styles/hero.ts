@@ -8,7 +8,7 @@ export const heroStyles = {
   section: `relative w-full ${responsive.heroHeight} overflow-hidden`,
   backgroundImage: "object-cover w-full h-full object-top",
   overlay: "absolute inset-0 bg-black/40 z-10",
-  container: `relative z-20 ${responsive.containerWide} h-full flex items-center py-24 sm:py-28 lg:py-0`,
+  container: `relative z-20 ${responsive.containerWide} h-full flex items-center py-8 sm:py-12 lg:py-0`,
   content: responsive.splitContent,
   leftContent: responsive.splitLeft,
   subtitle:
@@ -22,7 +22,7 @@ export const heroStyles = {
   hidden: "opacity-0",
   rightContent: responsive.splitRight,
   productImage:
-    "relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none h-[240px] sm:h-[300px] md:h-[400px] lg:h-[600px]",
+    "relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none h-[200px] sm:h-[250px] md:h-[350px] lg:h-[600px]",
 } as const
 
 export type HeroStyles = typeof heroStyles

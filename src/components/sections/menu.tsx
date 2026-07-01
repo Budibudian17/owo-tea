@@ -1,10 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import { menuStyles } from "@/styles/menu"
 import Image from "next/image"
 import MenuRandomBackground from "@/components/ui/menu-random-background"
+import { useIsDesktop } from "@/hooks/use-media-query"
 
 export default function Menu() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
+  const isDesktop = useIsDesktop()
+
   const menuItems = [
     {
       id: 1,
@@ -88,6 +94,27 @@ export default function Menu() {
     }
   ]
 
+  const totalPages = Math.ceil(menuItems.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentItems = menuItems.slice(startIndex, endIndex)
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
   return (
     <section id="menu" className={menuStyles.section}>
       <MenuRandomBackground />
@@ -108,7 +135,7 @@ export default function Menu() {
 
           {/* Menu Grid */}
           <div className={menuStyles.grid}>
-            {menuItems.map((item) => (
+            {(isDesktop ? menuItems : currentItems).map((item) => (
               <div key={item.id} className={menuStyles.menuItem}>
                 <div className={menuStyles.itemImage}>
                   <Image
@@ -129,6 +156,39 @@ export default function Menu() {
                 )}
               </div>
             ))}
+          </div>
+
+          {/* Pagination - Mobile Only */}
+          <div className="sm:hidden flex items-center justify-center gap-3 mt-6">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 1}
+              className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-green-600 text-green-600 disabled:border-gray-300 disabled:text-gray-300 hover:bg-green-600 hover:text-white transition-all disabled:hover:bg-transparent disabled:hover:text-gray-300"
+            >
+              ←
+            </button>
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => goToPage(page)}
+                  className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${
+                    currentPage === page
+                      ? 'bg-green-600 text-white'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages}
+              className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-green-600 text-green-600 disabled:border-gray-300 disabled:text-gray-300 hover:bg-green-600 hover:text-white transition-all disabled:hover:bg-transparent disabled:hover:text-gray-300"
+            >
+              →
+            </button>
           </div>
         </div>
       </div>

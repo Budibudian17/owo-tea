@@ -24,11 +24,11 @@ export const ctaStyles = {
   productImage:
     "relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none h-[220px] sm:h-[280px] md:h-[350px] lg:h-[500px]",
   lemonContainer:
-    "hidden sm:block absolute top-4 sm:top-8 left-4 sm:left-20 w-16 h-16 sm:w-24 sm:h-24 z-30",
+    "absolute top-4 left-4 w-12 h-12 sm:w-24 sm:h-24 sm:top-8 sm:left-20 z-30",
   leaf1Container:
-    "hidden md:block absolute -bottom-10 left-0 w-32 h-32 lg:w-48 lg:h-48 z-30",
+    "absolute -bottom-5 left-0 w-20 h-20 md:w-32 md:h-32 lg:w-48 lg:h-48 z-30",
   leaf2Container:
-    "hidden md:block absolute -bottom-20 right-0 w-32 h-32 lg:w-48 lg:h-48 z-30",
+    "absolute -bottom-10 right-0 w-20 h-20 md:w-32 md:h-32 lg:w-48 lg:h-48 z-30",
 } as const
 
 export type CTAStyles = typeof ctaStyles

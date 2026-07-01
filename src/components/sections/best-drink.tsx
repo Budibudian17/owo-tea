@@ -73,7 +73,7 @@ export default function BestDrink() {
           {products.map((product) => (
             <div
               key={product.id}
-              className={`${bestDrinkStyles.card} ${product.isFeatured ? bestDrinkStyles.featuredCard : ""} ${product.isComingSoon ? bestDrinkStyles.comingSoonCard : ""}`}
+              className={`${bestDrinkStyles.card} ${product.isFeatured ? bestDrinkStyles.featuredCard : ""} ${product.isComingSoon ? bestDrinkStyles.comingSoonCard : ""} ${product.isFeatured && !isDesktop ? "order-first" : ""}`}
               style={{
                 transform: getCardTransform(product),
                 transition:

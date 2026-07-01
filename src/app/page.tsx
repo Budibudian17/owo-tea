@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import Navbar from "@/components/layout/navbar"
 import Hero from "@/components/sections/hero"
 import BestDrink from "@/components/sections/best-drink"
@@ -14,24 +15,22 @@ import Team from "@/components/sections/team"
 import MarqueeFooter from "@/components/sections/marquee-footer"
 import Testimonial from "@/components/sections/testimonial"
 import Footer from "@/components/sections/footer"
-import Loading from "@/components/ui/loading"
 import MusicWidget from "@/components/ui/music-widget"
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    // Check if user needs to see loading page
+    const lastVisit = localStorage.getItem('lastVisit')
+    const now = Date.now()
+    const oneDay = 24 * 60 * 60 * 1000
 
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (isLoading) {
-    return <Loading />
-  }
+    if (!lastVisit || (now - parseInt(lastVisit)) >= oneDay) {
+      // First visit or visited more than 24 hours ago
+      router.push('/loading')
+    }
+  }, [router])
 
   return (
     <main>

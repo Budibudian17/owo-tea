@@ -14,7 +14,7 @@ export const testimonialStyles = {
   titleAccent: "text-green-600",
   subtitle:
     "text-gray-600 text-base sm:text-lg max-w-2xl mx-auto px-4 animate-slide-up delay-100",
-  marqueeContainer: "w-full overflow-hidden -mx-4 sm:mx-0",
+  marqueeContainer: "w-full overflow-hidden",
   marqueeWrapper: "relative",
   marqueeContent: "flex gap-4 sm:gap-8 animate-marquee hover:pause",
   card: "group relative bg-white rounded-2xl p-5 sm:p-8 hover:shadow-xl transition-all duration-500 transform lg:hover:-translate-y-2 min-w-[280px] sm:min-w-[320px] md:min-w-[400px] h-[340px] sm:h-[380px] md:h-[400px] flex flex-col justify-between",

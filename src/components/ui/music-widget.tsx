@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
-import { Music, Play } from "lucide-react"
+import { Music } from "lucide-react"
+import { musicWidgetStyles } from "@/styles/music-widget"
 
 export default function MusicWidget() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -50,7 +51,7 @@ export default function MusicWidget() {
     }
   }
 
-  const circumference = 2 * Math.PI * 36 // 36 is radius (slightly smaller than button)
+  const circumference = 2 * Math.PI * 36
   const strokeDashoffset = circumference - (progress / 100) * circumference
 
   return (
@@ -61,41 +62,35 @@ export default function MusicWidget() {
         src="/audio/thememusic.mp3"
       />
       
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className={musicWidgetStyles.container}>
         {/* Dynamic notification tooltip */}
         {showTooltip && (
-          <div className="absolute bottom-full right-0 mb-4 flex items-center gap-3 animate-slide-up">
-            <div className="bg-gradient-to-r from-green-600 to-green-700 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+          <div className={musicWidgetStyles.tooltipWrapper}>
+            <div className={musicWidgetStyles.tooltip}>
+              <div className={musicWidgetStyles.tooltipIcon}>
                 <Music size={20} />
               </div>
               <div>
-                <div className="font-semibold text-sm">Dengarkan musik kami</div>
-                <div className="text-xs text-green-100 mt-0.5">Klik untuk play</div>
+                <div className={musicWidgetStyles.tooltipText}>Dengarkan musik kami</div>
+                <div className={musicWidgetStyles.tooltipSubtext}>Klik untuk play</div>
               </div>
-              <div className="w-2 h-2 bg-white rounded-full animate-ping" />
+              <div className={musicWidgetStyles.tooltipPing} />
             </div>
-            {/* Arrow */}
-            <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-green-600" />
+            <div className={musicWidgetStyles.tooltipArrow} />
           </div>
         )}
 
         <button
           onClick={togglePlay}
-          className={`relative w-20 h-20 rounded-full shadow-2xl overflow-hidden transition-all duration-500 hover:scale-110 ${
-            isPlaying ? 'animate-spin-slow' : ''
-          }`}
-          style={{
-            animationDuration: isPlaying ? '3s' : '0s',
-          }}
+          className={musicWidgetStyles.button}
         >
-          {/* Circular progress indicator */}
-          <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none z-10">
+          {/* Circular progress indicator - stays fixed */}
+          <svg className={musicWidgetStyles.progressSvg}>
             <circle
               cx="40"
               cy="40"
               r="36"
-              stroke="rgba(34, 197, 94, 0.2)"
+              className={musicWidgetStyles.progressBg}
               strokeWidth="4"
               fill="none"
             />
@@ -103,7 +98,7 @@ export default function MusicWidget() {
               cx="40"
               cy="40"
               r="36"
-              stroke="#22c55e"
+              className={musicWidgetStyles.progressFill}
               strokeWidth="4"
               fill="none"
               strokeLinecap="round"
@@ -115,48 +110,54 @@ export default function MusicWidget() {
             />
           </svg>
 
-          {/* Vinyl record background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
-          
-          {/* Vinyl grooves */}
-          <div className="absolute inset-0 rounded-full border-2 border-gray-700/30" style={{ margin: '4px' }} />
-          <div className="absolute inset-0 rounded-full border-2 border-gray-700/20" style={{ margin: '8px' }} />
-          <div className="absolute inset-0 rounded-full border-2 border-gray-700/15" style={{ margin: '12px' }} />
-          <div className="absolute inset-0 rounded-full border-2 border-gray-700/10" style={{ margin: '16px' }} />
-          
-          {/* Center label */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center shadow-lg">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1">
-                <Image
-                  src="/images/owotealogolongs.webp"
-                  alt="OWO TEA"
-                  fill
-                  className="object-contain"
-                />
+          {/* Vinyl record wrapper - rotates when playing */}
+          <div 
+            className={`absolute inset-0 ${isPlaying ? 'animate-spin-slow' : ''}`}
+            style={{ animationDuration: '3s' }}
+          >
+            {/* Vinyl record background */}
+            <div className={musicWidgetStyles.vinylBg} />
+            
+            {/* Vinyl grooves */}
+            <div className={musicWidgetStyles.vinylGroove} style={{ margin: '4px' }} />
+            <div className={musicWidgetStyles.vinylGroove} style={{ margin: '8px' }} />
+            <div className={musicWidgetStyles.vinylGroove} style={{ margin: '12px' }} />
+            <div className={musicWidgetStyles.vinylGroove} style={{ margin: '16px' }} />
+            
+            {/* Center label */}
+            <div className={musicWidgetStyles.centerLabel}>
+              <div className={musicWidgetStyles.labelBg}>
+                <div className={musicWidgetStyles.labelInner}>
+                  <Image
+                    src="/images/owotealogolongs.webp"
+                    alt="OWO TEA"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </div>
+            </div>
+
+            {/* Center hole */}
+            <div className={musicWidgetStyles.centerHole}>
+              <div className={musicWidgetStyles.hole} />
             </div>
           </div>
 
-          {/* Center hole */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-gray-900" />
-          </div>
-
-          {/* Play/Pause indicator on hover */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity duration-300 z-20">
+          {/* Play/Pause indicator on hover - stays fixed */}
+          <div className={musicWidgetStyles.playIndicator}>
             {isPlaying ? (
-              <div className="flex gap-1">
-                <div className="w-1 h-6 bg-white rounded-full" />
-                <div className="w-1 h-6 bg-white rounded-full" />
+              <div className={musicWidgetStyles.pauseBars}>
+                <div className={musicWidgetStyles.pauseBar} />
+                <div className={musicWidgetStyles.pauseBar} />
               </div>
             ) : (
-              <div className="w-0 h-0 border-l-[12px] border-l-white border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ml-1" />
+              <div className={musicWidgetStyles.playTriangle} />
             )}
           </div>
 
-          {/* Shine effect */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+          {/* Shine effect - stays fixed */}
+          <div className={musicWidgetStyles.shine} />
         </button>
       </div>
     </>

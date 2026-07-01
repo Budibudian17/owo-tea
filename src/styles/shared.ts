@@ -22,9 +22,9 @@ export const responsive = {
   headingSection: "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold",
   headingCard: "text-xl sm:text-2xl md:text-3xl font-bold",
 
-  heroHeight: "min-h-[100svh] lg:h-screen",
+  heroHeight: "min-h-[60svh] lg:h-screen",
   fixedSectionHeight:
-    "min-h-0 h-auto py-16 sm:py-20 lg:h-[600px] lg:py-0 overflow-hidden",
+    "min-h-[500px] sm:min-h-[600px] h-auto py-12 sm:py-16 lg:h-[600px] lg:py-0 overflow-hidden",
 } as const
 
 export type ResponsiveStyles = typeof responsive

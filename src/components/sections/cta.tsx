@@ -65,7 +65,7 @@ export default function CTA() {
                   src="/images/iceteaalot.webp"
                   alt="Ice Tea Product"
                   fill
-                  className="object-contain animate-bounce-horizontal"
+                  className="object-contain sm:animate-bounce-horizontal"
                 />
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function CTA() {
           src="/images/lemon.webp"
           alt="Lemon"
           fill
-          className="object-contain animate-bounce-horizontal"
+          className="object-contain sm:animate-bounce-horizontal"
         />
       </div>
       <div className={ctaStyles.leaf1Container}>
@@ -87,7 +87,7 @@ export default function CTA() {
           src="/images/leaf1.webp"
           alt="Leaf"
           fill
-          className="object-contain animate-float"
+          className="object-contain sm:animate-float"
         />
       </div>
       <div className={ctaStyles.leaf2Container}>
@@ -95,7 +95,7 @@ export default function CTA() {
           src="/images/leaf2.webp"
           alt="Leaf"
           fill
-          className="object-contain animate-float"
+          className="object-contain sm:animate-float"
         />
       </div>
     </section>
