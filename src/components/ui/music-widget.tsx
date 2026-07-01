@@ -70,7 +70,7 @@ export default function MusicWidget() {
               <div className={musicWidgetStyles.tooltipIcon}>
                 <Music size={20} />
               </div>
-              <div>
+              <div className="flex flex-col">
                 <div className={musicWidgetStyles.tooltipText}>Dengarkan musik kami</div>
                 <div className={musicWidgetStyles.tooltipSubtext}>Klik untuk play</div>
               </div>

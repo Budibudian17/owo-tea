@@ -10,9 +10,9 @@ export const musicWidgetStyles = {
   // Tooltip notification
   tooltipWrapper: 'absolute bottom-full right-0 mb-4 flex items-center gap-3 animate-slide-up',
   tooltip: 'bg-gradient-to-r from-green-600 to-green-700 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3',
-  tooltipIcon: 'w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-pulse',
-  tooltipText: 'font-semibold text-sm',
-  tooltipSubtext: 'text-xs text-green-100 mt-0.5',
+  tooltipIcon: 'w-10 h-10 bg-white/20 rounded-full flex items-center justify-center animate-pulse flex-shrink-0',
+  tooltipText: 'font-semibold text-sm max-w-[120px]',
+  tooltipSubtext: 'text-xs text-green-100 mt-0.5 max-w-[120px]',
   tooltipPing: 'w-2 h-2 bg-white rounded-full animate-ping',
   tooltipArrow: 'w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-green-600',
   
